@@ -19,7 +19,12 @@ class Note(Document):
             'user_id',
             'is_pinned',
             'created_at',
-            {'fields': ['title', 'content'], 'name': 'text_search'}
+            # Proper text index for MongoDB
+            {
+                'fields': ['$title', '$content'],
+                'default_language': 'english',
+                'weights': {'title': 10, 'content': 5}
+            }
         ]
     }
 

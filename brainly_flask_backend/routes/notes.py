@@ -4,6 +4,7 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.note import Note
 from datetime import datetime
+import re
 
 notes_bp = Blueprint('notes', __name__)
 
@@ -41,13 +42,24 @@ def get_notes():
         search = request.args.get('search', '')
         category = request.args.get('category', '')
 
+        # Start with basic query
         query = {'user_id': user_id}
 
+        # Add text search if provided
         if search:
-            query['$text'] = {'$search': search}
+            # For simple search we can use regex instead of text search
+            # This is more flexible for small datasets
+            regex = re.compile(f'.*{re.escape(search)}.*', re.IGNORECASE)
+            query['$or'] = [
+                {'title': regex},
+                {'content': regex}
+            ]
+        
+        # Add category filter if provided
         if category:
             query['category'] = category
 
+        # Get notes and sort them
         notes = Note.objects(__raw__=query).order_by('-is_pinned', '-created_at')
 
         return jsonify({'notes': [note.to_dict() for note in notes]}), 200
