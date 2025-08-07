@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 50% 95%; /* Light background */
+    --foreground: 222.2 47.4% 1.2%; /* Dark foreground text */
+
+    --muted: 210 40% 96%; /* Muted light gray */
+    --muted-foreground: 215.4 16.3% 30%; /* Muted darker gray for contrast */
+
+    --accent: 210 40% 92%; /* Light accent color */
+    --accent-foreground: 220 40% 20%; /* Darker text for accents */
+
+    --popover: 210 40% 98%; /* Same as background */
+    --popover-foreground: 215 20.2% 20%; /* Popover text */
+
+    --border: 210 30% 90%; /* Light border */
+    --input: 210 30% 90%; /* Input borders same as border */
+
+    --card: 0 0% 100%; /* White card background */
+    --card-foreground: 222.2 47.4% 1.2%; /* Card text dark */
+
+    --primary: 210 40% 40%; /* A soft blue */
+    --primary-foreground: 0 0% 100%; /* White text on primary */
+
+    --secondary: 210 20% 95%; /* Light secondary background */
+    --secondary-foreground: 220 40% 20%; /* Darker text for secondary */
+
+    --destructive: 0 72% 51%; /* Soft red for destructive */
+    --destructive-foreground: 0 0% 100%; /* White text for destructive */
+
+    --ring: 210 30% 80%; /* Light border highlight */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 220 50% 95%; /* Use light colors for both themes initially */
+    --foreground: 222.2 47.4% 1.2%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 30%;
+
+    --accent: 210 40% 92%;
+    --accent-foreground: 220 40% 20%;
+
+    --popover: 210 40% 98%;
+    --popover-foreground: 215 20.2% 20%;
+
+    --border: 210 30% 90%;
+    --input: 210 30% 90%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 1.2%;
+
+    --primary: 210 40% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 20% 95%;
+    --secondary-foreground: 220 40% 20%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --ring: 210 30% 80%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
